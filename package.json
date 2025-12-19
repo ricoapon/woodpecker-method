@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:github-pages": "ng build --configuration development && cp dist/woodpecker-method/browser/index.html dist/woodpecker-method/browser/404.html",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
