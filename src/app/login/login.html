@@ -1,7 +1,22 @@
-<div style="text-align:center; margin-top: 50px;">
-  <h2>Login</h2>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="bg-light p-4 border rounded">
 
-  <button (click)="loginWithGoogle()">Login with Google</button>
+    <div class="form-signin w-100 m-auto">
+      <div>
+        <h1 class="h3 mb-3 fw-normal">Woodpecker Method</h1>
+        <button (click)="loginWithGoogle()" class="btn btn-outline-dark d-flex align-items-center px-3 py-2 w-100">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+               alt="Google logo"
+               width="20px"
+               height="20px">
+          <span class="flex-grow-1 text-center">Sign in with Google</span>
+        </button>
 
-  <p [@if]="error" style="color:red;">{{ error }}</p>
+        @if (error) {
+          <p style="color:red;">{{ error }}</p>
+        }
+      </div>
+    </div>
+
+  </div>
 </div>
