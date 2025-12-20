@@ -1,0 +1,27 @@
+/* THIS FILE APPLIES GLOBAL CSS. That is needed to get the CSS applied to the board dependency. */
+
+cg-board {
+  /* Use a nicer blue-ish default color. Alternatively, I could download https://lichess1.org/assets/hashed/brown.d4a5fe34.png.
+  There are so many options, I just stick with this one for now. */
+  background-color: #849FB4 !important;
+
+
+  /* Use rounded corners, just like Lichess. */
+  border-radius: 5px;
+}
+
+/* Put the rank coordinates on the right. */
+.cg-wrap coords.ranks {
+  right: 0 !important;
+  left: auto !important;
+  width: 8px !important;
+  font-weight: bold;
+}
+
+/* The default file coordinates looked a bit weird, so I moved them around to fit better. */
+.cg-wrap coords.files {
+  left: 3px !important;
+  text-transform: none !important;
+  text-align: left !important;
+  font-weight: bold;
+}

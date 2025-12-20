@@ -1,6 +1,5 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
   <div class="bg-light p-4 border rounded">
-
     <div>
       Logged in as {{ user.displayName }}
       <button (click)="logout()">Logout</button>
@@ -10,6 +9,8 @@
       Counter: {{ currentPuzzle() }}
       <button (click)="increase()">Increase</button>
     </div>
+
+    <app-chessboard></app-chessboard>
 
   </div>
 </div>

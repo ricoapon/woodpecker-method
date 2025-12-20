@@ -3,10 +3,13 @@ import {AuthService} from '../login/auth.service';
 import {Router} from '@angular/router';
 import {User} from '@angular/fire/auth';
 import {PuzzleFirestoreService} from '../firestore/puzzle.firestore.service';
+import {Chessboard} from '../chessboard/chessboard';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [
+    Chessboard
+  ],
   templateUrl: './home.html',
   styleUrl: './home.css',
   standalone: true
