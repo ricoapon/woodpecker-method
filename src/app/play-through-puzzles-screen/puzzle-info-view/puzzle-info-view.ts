@@ -17,6 +17,7 @@ export class PuzzleInfoView {
   puzzleEnded = false
   _puzzle!: Puzzle
   @Output() goToNextPuzzle = new EventEmitter<void>()
+  @Output() showHint = new EventEmitter<void>()
 
   @Input()
   set puzzle(value: Puzzle) {

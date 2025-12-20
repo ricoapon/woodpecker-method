@@ -6,9 +6,9 @@
     </div>
 
     @if (!puzzleEnded) {
-      <button (click)="puzzleEnded = true" class="btn btn-secondary">
-        <i class="bi bi-flag-fill me-2"></i>
-        Give up
+      <button (click)="showHint.emit()" class="btn btn-secondary">
+        <i class="bi bi-lightbulb"></i>
+        Show hint
       </button>
     }
     @if (puzzleEnded) {

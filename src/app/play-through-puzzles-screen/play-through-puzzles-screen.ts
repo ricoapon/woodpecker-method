@@ -20,6 +20,7 @@ import {PuzzleInfoView} from './puzzle-info-view/puzzle-info-view';
 })
 export class PlayThroughPuzzlesScreen {
   @ViewChild('puzzleInfoView') puzzleInfoView!: PuzzleInfoView;
+  @ViewChild('puzzleView') puzzleView!: PuzzleInfoView;
   // TODO: not make it a signal? Or maybe start at starting chess board position?
   // Bit weird how the board starts with moving pieces instead of immediately showing the right board.
   currentPuzzle = signal(getPuzzle(1))

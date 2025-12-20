@@ -162,4 +162,23 @@ export class ChessboardView implements AfterViewInit, OnChanges {
       }
     })
   }
+
+  drawArrowForMove(move: string) {
+    // Convert the move into from-to coordinates without affecting the chess variable, which is going to be modified
+    // using the onMove method.
+    const moveObject = this.chess.move(move)
+    this.chess.undo()
+
+    this.chessgroundInstance.set({
+      drawable: {
+        shapes: [
+          {
+            orig: moveObject.from,
+            dest: moveObject.to,
+            brush: 'green'
+          }
+        ]
+      }
+    });
+  }
 }

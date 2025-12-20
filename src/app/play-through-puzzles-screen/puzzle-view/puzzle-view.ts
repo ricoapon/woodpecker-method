@@ -72,4 +72,9 @@ export class PuzzleView implements AfterViewInit {
     this.chessboard.makeImmutable()
     this.completed.emit()
   }
+
+  showHint() {
+    const correctMove = this.solutionMoves[this.currentMove]
+    this.chessboard.drawArrowForMove(correctMove)
+  }
 }
