@@ -42,7 +42,7 @@ export class ChessboardView implements AfterViewInit, OnChanges {
     if (this.parentDiv === undefined) {
       return
     }
-    const parentWidth = this.parentDiv.nativeElement.offsetWidth - 1
+    const parentWidth = this.parentDiv.nativeElement.offsetWidth - 2
     this.boardEl.nativeElement.style.width = parentWidth + 'px'
     this.boardEl.nativeElement.style.height = parentWidth + 'px'
   }
