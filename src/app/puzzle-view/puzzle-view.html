@@ -1,0 +1,5 @@
+<div>
+  <h1>Puzzle {{ puzzleId }}</h1>
+
+  <app-chessboard #chessboard [fen]="chess.fen()" (playedMove)="onPlayedMove($event)"></app-chessboard>
+</div>

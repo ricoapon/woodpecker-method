@@ -3,18 +3,21 @@ import {AuthService} from '../login/auth.service';
 import {Router} from '@angular/router';
 import {User} from '@angular/fire/auth';
 import {PuzzleFirestoreService} from '../firestore/puzzle.firestore.service';
-import {Chessboard} from '../chessboard/chessboard';
+import {getPuzzle} from '../puzzle-view/puzzle';
+import {PuzzleView} from '../puzzle-view/puzzle-view';
 
 @Component({
   selector: 'app-home',
   imports: [
-    Chessboard
+    PuzzleView
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',
   standalone: true
 })
 export class Home {
+  puzzle1 = getPuzzle(1)
+
   currentPuzzle = signal(0)
   user: User;
 
