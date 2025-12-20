@@ -92,7 +92,8 @@ export class ChessboardView implements AfterViewInit, OnChanges {
       lastMove: []
     });
 
-    this.setPossibleMoves();
+    this.makeMutable()
+    this.setPossibleMoves()
   }
 
   onMove(from: Key, to: Key) {
@@ -149,6 +150,15 @@ export class ChessboardView implements AfterViewInit, OnChanges {
       viewOnly: true,
       drawable: {
         enabled: false
+      }
+    })
+  }
+
+  makeMutable() {
+    this.chessgroundInstance.set({
+      viewOnly: false,
+      drawable: {
+        enabled: true
       }
     })
   }
