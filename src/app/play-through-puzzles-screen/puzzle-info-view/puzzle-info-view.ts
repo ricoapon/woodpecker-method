@@ -38,7 +38,10 @@ export class PuzzleInfoView {
     chess.loadPgn(this._puzzle.pgn)
     while (chess.undo() != null) {
     }
-    const url = `https://lichess.org/analysis/${chess.fen()}`
+    let url = `https://lichess.org/analysis/${chess.fen()}`;
+    if (chess.turn() === 'b') {
+      url += "?pov=black"
+    }
     window.open(url, '_blank')
   }
 
