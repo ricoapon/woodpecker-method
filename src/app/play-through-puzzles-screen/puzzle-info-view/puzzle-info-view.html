@@ -1,10 +1,9 @@
 <div class="main">
   <div class="d-flex flex-column gap-1">
 
-  <div class="btn mb-3 static-button" [ngClass]="colorToMove === 'White' ? 'btn-light' : 'btn-dark'">
-    {{ colorToMove }} to move
-  </div>
-
+    <div class="btn mb-3 static-button" [ngClass]="colorToMove === 'White' ? 'btn-light' : 'btn-dark'">
+      {{ colorToMove }} to move
+    </div>
 
     @if (!puzzleEnded) {
       <button (click)="puzzleEnded = true" class="btn btn-secondary">
