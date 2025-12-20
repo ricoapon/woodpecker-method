@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, signal, ViewChild} from '@angular/core';
 import {getPuzzle, totalNrOfPuzzles} from '../puzzle';
 import {User} from '@angular/fire/auth';
 import {FirestoreService} from '../firestore/firestore.service';
@@ -19,7 +19,10 @@ import {PuzzleInfoView} from './puzzle-info-view/puzzle-info-view';
   standalone: true
 })
 export class PlayThroughPuzzlesScreen {
-  currentPuzzleObject = signal(getPuzzle(1))
+  @ViewChild('puzzleInfoView') puzzleInfoView!: PuzzleInfoView;
+  // TODO: not make it a signal? Or maybe start at starting chess board position?
+  // Bit weird how the board starts with moving pieces instead of immediately showing the right board.
+  currentPuzzle = signal(getPuzzle(1))
   user: User;
 
   constructor(private puzzleService: FirestoreService, private authService: AuthService) {
@@ -28,18 +31,24 @@ export class PlayThroughPuzzlesScreen {
   }
 
   onPuzzleCompleted() {
-    if (this.currentPuzzleObject().id >= totalNrOfPuzzles()) {
+    this.puzzleInfoView.puzzleEnded = true
+  }
+
+  private initializePuzzle(puzzleId: number) {
+    this.currentPuzzle.update(() => getPuzzle(puzzleId))
+  }
+
+  goToNextPuzzle() {
+    if (this.currentPuzzle().id >= totalNrOfPuzzles()) {
       // Go back to 1 (puzzleId starts counting at 1).
       this.initializePuzzle(1)
       // TODO: error handling.
       this.puzzleService.setCurrentPuzzleToOne()
     } else {
-      this.initializePuzzle(this.currentPuzzleObject().id + 1)
+      this.initializePuzzle(this.currentPuzzle().id + 1)
       this.puzzleService.incrementCurrentPuzzle()
     }
-  }
 
-  private initializePuzzle(puzzleId: number) {
-    this.currentPuzzleObject.update(() => getPuzzle(puzzleId))
+    this.puzzleInfoView.puzzleEnded = false
   }
 }

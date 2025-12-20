@@ -1,3 +1,32 @@
 <div class="main">
-  {{ colorToMove }} to move!
+  <div class="d-flex flex-column gap-1">
+
+  <div class="btn mb-3 static-button" [ngClass]="colorToMove === 'White' ? 'btn-light' : 'btn-dark'">
+    {{ colorToMove }} to move
+  </div>
+
+
+    @if (!puzzleEnded) {
+      <button (click)="puzzleEnded = true" class="btn btn-secondary">
+        <i class="bi bi-flag-fill me-2"></i>
+        Give up
+      </button>
+    }
+    @if (puzzleEnded) {
+      <button (click)="goToNextPuzzle.emit()" class="btn btn-success">
+        <i class="bi bi-arrow-right-circle-fill me-2"></i>
+        Next puzzle
+      </button>
+
+      <button (click)="openPuzzleFenInLichess()" class="btn btn-secondary">
+        <i class="bi bi-diagram-3-fill me-2"></i>
+        Analyse position
+      </button>
+
+      <button (click)="openPuzzlePgnInLichess()" class="btn btn-secondary">
+        <i class="bi bi-box-arrow-up-right me-2"></i>
+        Analyse PGN
+      </button>
+    }
+  </div>
 </div>
