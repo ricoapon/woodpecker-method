@@ -1,5 +1,5 @@
 import {Component, signal} from '@angular/core';
-import {AuthService} from '../login/auth.service';
+import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
 import {User} from '@angular/fire/auth';
 import {PuzzleFirestoreService} from '../firestore/puzzle.firestore.service';

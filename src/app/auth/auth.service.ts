@@ -4,7 +4,7 @@ import {firstValueFrom, Observable} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  private readonly user$: Observable<User | null>
+  public readonly user$: Observable<User | null>
   // Keep a synced value for convenience.
   private _currentUser: User | null = null
 
