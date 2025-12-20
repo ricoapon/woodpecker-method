@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Home } from './home';
+import { PlayThroughPuzzlesScreen } from './play-through-puzzles-screen';
 
-describe('Home', () => {
-  let component: Home;
-  let fixture: ComponentFixture<Home>;
+describe('PlayThroughPuzzlesScreen', () => {
+  let component: PlayThroughPuzzlesScreen;
+  let fixture: ComponentFixture<PlayThroughPuzzlesScreen>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Home]
+      imports: [PlayThroughPuzzlesScreen]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Home);
+    fixture = TestBed.createComponent(PlayThroughPuzzlesScreen);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

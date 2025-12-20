@@ -1,21 +1,25 @@
 import {Component, signal} from '@angular/core';
-import {AuthService} from '../auth/auth.service';
-import {Router} from '@angular/router';
+import {getPuzzle} from '../puzzle';
 import {User} from '@angular/fire/auth';
 import {FirestoreService} from '../firestore/firestore.service';
-import {getPuzzle} from '../puzzle-view/puzzle';
-import {PuzzleView} from '../puzzle-view/puzzle-view';
+import {AuthService} from '../auth/auth.service';
+import {Router} from '@angular/router';
+import {PuzzleView} from './puzzle-view/puzzle-view';
+import {HeaderView} from './header-view/header-view';
+import {PuzzleInfoView} from './puzzle-info-view/puzzle-info-view';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-play-through-puzzles-screen',
   imports: [
-    PuzzleView
+    PuzzleView,
+    HeaderView,
+    PuzzleInfoView
   ],
-  templateUrl: './home.html',
-  styleUrl: './home.css',
+  templateUrl: './play-through-puzzles-screen.html',
+  styleUrl: './play-through-puzzles-screen.css',
   standalone: true
 })
-export class Home {
+export class PlayThroughPuzzlesScreen {
   puzzle1 = getPuzzle(1)
 
   currentPuzzle = signal(0)

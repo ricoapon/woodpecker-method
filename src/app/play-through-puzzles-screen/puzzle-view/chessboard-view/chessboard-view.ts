@@ -15,14 +15,14 @@ import {Chess, SQUARES} from 'chess.js'
 import {Api} from '@lichess-org/chessground/api';
 
 @Component({
-  selector: 'app-chessboard',
+  selector: 'app-chessboard-view',
   imports: [],
-  templateUrl: './chessboard.html',
-  styleUrl: './chessboard.css',
+  templateUrl: './chessboard-view.html',
+  styleUrl: './chessboard-view.css',
   standalone: true,
   encapsulation: ViewEncapsulation.None
 })
-export class Chessboard implements AfterViewInit {
+export class ChessboardView implements AfterViewInit {
   @ViewChild('boardContainer') boardEl!: ElementRef<HTMLDivElement>
   @Input() fen!: string
   @Output() playedMove = new EventEmitter<string>()

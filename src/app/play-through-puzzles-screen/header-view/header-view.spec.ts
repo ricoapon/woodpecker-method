@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Chessboard } from './chessboard';
+import { HeaderView } from './header-view';
 
-describe('Chessboard', () => {
-  let component: Chessboard;
-  let fixture: ComponentFixture<Chessboard>;
+describe('HeaderView', () => {
+  let component: HeaderView;
+  let fixture: ComponentFixture<HeaderView>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Chessboard]
+      imports: [HeaderView]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Chessboard);
+    fixture = TestBed.createComponent(HeaderView);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

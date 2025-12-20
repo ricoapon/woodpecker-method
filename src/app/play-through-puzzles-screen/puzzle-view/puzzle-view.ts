@@ -1,19 +1,19 @@
 import {Component, Input, ViewChild} from '@angular/core';
 import {Chess} from 'chess.js';
-import {Chessboard} from '../chessboard/chessboard';
-import {Puzzle} from './puzzle';
+import {ChessboardView} from './chessboard-view/chessboard-view';
+import {Puzzle} from '../../puzzle';
 
 @Component({
   selector: 'app-puzzle-view',
   imports: [
-    Chessboard
+    ChessboardView
   ],
   templateUrl: './puzzle-view.html',
   styleUrl: './puzzle-view.css',
   standalone: true
 })
 export class PuzzleView {
-  @ViewChild('chessboard') chessboard!: Chessboard;
+  @ViewChild('chessboard') chessboard!: ChessboardView;
 
   puzzleId = 0
   currentMove = -1
