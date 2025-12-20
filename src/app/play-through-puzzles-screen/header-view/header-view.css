@@ -1,0 +1,15 @@
+h3 {
+  margin: 0;
+}
+
+nav {
+  background-color: #849FB4;
+  margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+  nav {
+    border-radius: 5px;
+    padding: 1em;
+  }
+}

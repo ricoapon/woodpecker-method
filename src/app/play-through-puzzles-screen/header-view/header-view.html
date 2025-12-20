@@ -1,8 +1,8 @@
-<div>
-  Logged in as {{ user.displayName }}
-  <button (click)="logout()">Logout</button>
-</div>
-
-<div>
-  Puzzle: {{ puzzleId }}
-</div>
+<nav class="navbar">
+  <div class="container-fluid">
+    <h3>Puzzle: {{ puzzleId }}</h3>
+    <div>
+      {{ user.displayName }} (<a href="#" (click)="logout()">logout</a>)
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,15 @@
+.main {
+  background-color: #849FB4;
+  margin-top: 5px;
+  height: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .main {
+    border-radius: 5px;
+    margin-left: 1em;
+    margin-top: 0;
+    padding: 1em;
+  }
+}
