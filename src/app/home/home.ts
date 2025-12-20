@@ -2,7 +2,7 @@ import {Component, signal} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
 import {User} from '@angular/fire/auth';
-import {PuzzleFirestoreService} from '../firestore/puzzle.firestore.service';
+import {FirestoreService} from '../firestore/firestore.service';
 import {getPuzzle} from '../puzzle-view/puzzle';
 import {PuzzleView} from '../puzzle-view/puzzle-view';
 
@@ -21,7 +21,7 @@ export class Home {
   currentPuzzle = signal(0)
   user: User;
 
-  constructor(private puzzleService: PuzzleFirestoreService, private authService: AuthService, private router: Router) {
+  constructor(private puzzleService: FirestoreService, private authService: AuthService, private router: Router) {
     puzzleService.getCurrentPuzzle().then(v => this.currentPuzzle.set(v))
     this.user = this.authService.currentUser()
   }
