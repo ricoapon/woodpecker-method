@@ -4,10 +4,6 @@ cg-board {
   /* Use a nicer blue-ish default color. Alternatively, I could download https://lichess1.org/assets/hashed/brown.d4a5fe34.png.
   There are so many options, I just stick with this one for now. */
   background-color: #849FB4 !important;
-
-
-  /* Use rounded corners, just like Lichess. */
-  border-radius: 5px;
 }
 
 /* Put the rank coordinates on the right. */
@@ -24,4 +20,11 @@ cg-board {
   text-transform: none !important;
   text-align: left !important;
   font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  cg-board {
+    /* Use rounded corners, just like Lichess. */
+    border-radius: 5px;
+  }
 }
