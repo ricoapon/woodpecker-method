@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
+  EventEmitter, HostListener,
   Input,
   Output,
   ViewChild,
@@ -24,11 +24,27 @@ import {Api} from '@lichess-org/chessground/api';
 })
 export class ChessboardView implements AfterViewInit {
   @ViewChild('boardContainer') boardEl!: ElementRef<HTMLDivElement>
+  parentDiv!: ElementRef
   @Input() fen!: string
   @Output() playedMove = new EventEmitter<string>()
   chess!: Chess
   chessgroundInstance!: Api
   playerOrientation!: 'w' | 'b'
+
+  @HostListener('window:resize')
+  onResize() {
+    this.resizeSquare()
+  }
+
+  // The board has no responsive functionality, so we resize it ourselves.
+  private resizeSquare() {
+    if (this.parentDiv === undefined) {
+      return
+    }
+    const parentWidth = this.parentDiv.nativeElement.offsetWidth
+    this.boardEl.nativeElement.style.width = parentWidth + 'px'
+    this.boardEl.nativeElement.style.height = parentWidth + 'px'
+  }
 
   ngAfterViewInit() {
     this.chess = new Chess(this.fen)
@@ -52,6 +68,7 @@ export class ChessboardView implements AfterViewInit {
     // Create the board inside the container.
     this.chessgroundInstance = Chessground(this.boardEl.nativeElement, config)
     this.setPossibleMoves()
+    this.resizeSquare()
   }
 
   onMove(from: Key, to: Key) {

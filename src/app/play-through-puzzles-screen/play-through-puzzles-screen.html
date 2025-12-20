@@ -1,9 +1,19 @@
-<div class="d-flex justify-content-center align-items-center vh-100">
-  <div class="bg-light p-4 border rounded">
+<div class="app-container">
+  <div class="header">
     <app-header-view [puzzleId]="puzzle1.id"></app-header-view>
+  </div>
 
-    <app-puzzle-view [puzzle]="puzzle1"></app-puzzle-view>
+  <div class="row g-0">
+    <div class="col-12 col-md-8">
+      <div class="board">
+        <app-puzzle-view [puzzle]="puzzle1"></app-puzzle-view>
+      </div>
+    </div>
 
-    <app-puzzle-info-view [puzzle]="puzzle1"></app-puzzle-info-view>
+    <div class="col-12 col-md-4">
+      <div class="info h-100">
+        <app-puzzle-info-view [puzzle]="puzzle1"></app-puzzle-info-view>
+      </div>
+    </div>
   </div>
 </div>

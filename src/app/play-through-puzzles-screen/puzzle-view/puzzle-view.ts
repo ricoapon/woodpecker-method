@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Chess} from 'chess.js';
 import {ChessboardView} from './chessboard-view/chessboard-view';
 import {Puzzle} from '../../puzzle';
@@ -12,8 +12,9 @@ import {Puzzle} from '../../puzzle';
   styleUrl: './puzzle-view.css',
   standalone: true
 })
-export class PuzzleView {
+export class PuzzleView implements AfterViewInit {
   @ViewChild('chessboard') chessboard!: ChessboardView;
+  @ViewChild('boardParentDiv') boardParentDiv!: ElementRef;
 
   puzzleId = 0
   currentMove = -1
@@ -23,6 +24,11 @@ export class PuzzleView {
   @Input()
   set puzzle(value: Puzzle) {
     this.initializeFromPuzzle(value);
+  }
+
+  ngAfterViewInit() {
+    this.chessboard.parentDiv = this.boardParentDiv;
+    this.chessboard.onResize()
   }
 
   initializeFromPuzzle(puzzle: Puzzle) {
