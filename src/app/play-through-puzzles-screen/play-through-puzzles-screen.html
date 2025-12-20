@@ -1,18 +1,18 @@
 <div class="app-container">
   <div class="header">
-    <app-header-view [puzzleId]="puzzle1.id"></app-header-view>
+    <app-header-view [puzzleId]="currentPuzzleObject().id"></app-header-view>
   </div>
 
   <div class="row g-0">
     <div class="col-12 col-md-8">
       <div class="board">
-        <app-puzzle-view [puzzle]="puzzle1"></app-puzzle-view>
+        <app-puzzle-view [puzzle]="currentPuzzleObject()"></app-puzzle-view>
       </div>
     </div>
 
     <div class="col-12 col-md-4">
       <div class="info h-100">
-        <app-puzzle-info-view [puzzle]="puzzle1"></app-puzzle-info-view>
+        <app-puzzle-info-view [puzzle]="currentPuzzleObject()"></app-puzzle-info-view>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Chess} from 'chess.js';
 import {ChessboardView} from './chessboard-view/chessboard-view';
 import {Puzzle} from '../../puzzle';
@@ -15,6 +15,7 @@ import {Puzzle} from '../../puzzle';
 export class PuzzleView implements AfterViewInit {
   @ViewChild('chessboard') chessboard!: ChessboardView;
   @ViewChild('boardParentDiv') boardParentDiv!: ElementRef;
+  @Output() completed = new EventEmitter<void>()
 
   puzzleId = 0
   currentMove = -1
@@ -54,16 +55,21 @@ export class PuzzleView implements AfterViewInit {
       const computerMove = this.solutionMoves[this.currentMove + 1]
 
       if (computerMove === undefined) {
-        alert("You completed the puzzle!")
+        this.emitCompleted()
       } else {
         this.chessboard.playMove(computerMove)
         this.currentMove += 2
 
         // It could be that the PGN ends on a move for the opponent. Check this situation
         if (this.currentMove >= this.solutionMoves.length) {
-          alert("You completed the puzzle!")
+          this.emitCompleted()
         }
       }
     }
+  }
+
+  emitCompleted() {
+    this.chessboard.makeImmutable()
+    this.completed.emit()
   }
 }

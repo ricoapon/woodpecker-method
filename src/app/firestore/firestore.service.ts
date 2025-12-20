@@ -16,10 +16,10 @@ export class FirestoreService {
 
     if (userSnap.exists()) {
       const data = userSnap.data();
-      return data['currentPuzzle'] ?? 0;
+      return data['currentPuzzle'] ?? 1;
     } else {
       // Create document if it doesn't exist.
-      await setDoc(userDocRef, {currentPuzzle: 0})
+      await setDoc(userDocRef, {currentPuzzle: 1})
       return 0;
     }
   }
@@ -30,10 +30,10 @@ export class FirestoreService {
     await updateDoc(userDocRef, {currentPuzzle: increment(1)});
   }
 
-  // When we finished all puzzles, we go back to 0.
-  async setCurrentPuzzleToZero(): Promise<void> {
+  // When we finished all puzzles, we go back to 1 (number equals the puzzle in the book, which starts at 1).
+  async setCurrentPuzzleToOne(): Promise<void> {
     const user = this.authService.currentUser()
     const userDocRef = doc(this.firestore, `users/${user.uid}`);
-    await updateDoc(userDocRef, {currentPuzzle: 0});
+    await updateDoc(userDocRef, {currentPuzzle: 1});
   }
 }

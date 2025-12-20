@@ -1,9 +1,8 @@
 import {Component, signal} from '@angular/core';
-import {getPuzzle} from '../puzzle';
+import {getPuzzle, totalNrOfPuzzles} from '../puzzle';
 import {User} from '@angular/fire/auth';
 import {FirestoreService} from '../firestore/firestore.service';
 import {AuthService} from '../auth/auth.service';
-import {Router} from '@angular/router';
 import {PuzzleView} from './puzzle-view/puzzle-view';
 import {HeaderView} from './header-view/header-view';
 import {PuzzleInfoView} from './puzzle-info-view/puzzle-info-view';
@@ -20,23 +19,27 @@ import {PuzzleInfoView} from './puzzle-info-view/puzzle-info-view';
   standalone: true
 })
 export class PlayThroughPuzzlesScreen {
-  puzzle1 = getPuzzle(1)
-
-  currentPuzzle = signal(0)
+  currentPuzzleObject = signal(getPuzzle(1))
   user: User;
 
-  constructor(private puzzleService: FirestoreService, private authService: AuthService, private router: Router) {
-    puzzleService.getCurrentPuzzle().then(v => this.currentPuzzle.set(v))
+  constructor(private puzzleService: FirestoreService, private authService: AuthService) {
+    puzzleService.getCurrentPuzzle().then(puzzleId => this.initializePuzzle(puzzleId))
     this.user = this.authService.currentUser()
   }
 
-  increase() {
-    this.currentPuzzle.update(v => v + 1)
-    // TODO: error handling.
-    this.puzzleService.incrementCurrentPuzzle()
+  onPuzzleCompleted() {
+    if (this.currentPuzzleObject().id >= totalNrOfPuzzles()) {
+      // Go back to 1 (puzzleId starts counting at 1).
+      this.initializePuzzle(1)
+      // TODO: error handling.
+      this.puzzleService.setCurrentPuzzleToOne()
+    } else {
+      this.initializePuzzle(this.currentPuzzleObject().id + 1)
+      this.puzzleService.incrementCurrentPuzzle()
+    }
   }
 
-  logout() {
-    this.authService.logout().then(() => this.router.navigate(['/login']))
+  private initializePuzzle(puzzleId: number) {
+    this.currentPuzzleObject.update(() => getPuzzle(puzzleId))
   }
 }

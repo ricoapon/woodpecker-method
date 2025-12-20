@@ -2,9 +2,10 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter, HostListener,
-  Input,
-  Output,
+  EventEmitter,
+  HostListener,
+  Input, OnChanges,
+  Output, SimpleChanges,
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
@@ -22,7 +23,7 @@ import {Api} from '@lichess-org/chessground/api';
   standalone: true,
   encapsulation: ViewEncapsulation.None
 })
-export class ChessboardView implements AfterViewInit {
+export class ChessboardView implements AfterViewInit, OnChanges {
   @ViewChild('boardContainer') boardEl!: ElementRef<HTMLDivElement>
   parentDiv!: ElementRef
   @Input() fen!: string
@@ -69,6 +70,29 @@ export class ChessboardView implements AfterViewInit {
     this.chessgroundInstance = Chessground(this.boardEl.nativeElement, config)
     this.setPossibleMoves()
     this.resizeSquare()
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['fen'] && !changes['fen'].firstChange) {
+      this.updateBoardFromFen(changes['fen'].currentValue);
+    }
+  }
+
+  private updateBoardFromFen(fen: string) {
+    if (!this.chessgroundInstance) {
+      return;
+    }
+
+    this.chess.load(fen);
+    this.playerOrientation = this.chess.turn();
+
+    this.chessgroundInstance.set({
+      fen: this.chess.fen(),
+      orientation: this.playerOrientation === 'w' ? 'white' : 'black',
+      lastMove: []
+    });
+
+    this.setPossibleMoves();
   }
 
   onMove(from: Key, to: Key) {
@@ -118,5 +142,14 @@ export class ChessboardView implements AfterViewInit {
     this.chess.undo()
 
     this.chessgroundInstance.move(moveObject.from, moveObject.to)
+  }
+
+  makeImmutable() {
+    this.chessgroundInstance.set({
+      viewOnly: true,
+      drawable: {
+        enabled: false
+      }
+    })
   }
 }
