@@ -33,6 +33,9 @@ export class PuzzleView implements AfterViewInit {
   }
 
   initializeFromPuzzle(puzzle: Puzzle) {
+    // This shouldn't be needed, but for some reason it sometimes stays immutable anyway.
+    this.chessboard.makeMutable()
+
     this.puzzleId = puzzle.id
 
     // When loading a PGN, the board will fast-forward to the last position. This is not what we want to display.
