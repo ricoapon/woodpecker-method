@@ -34,7 +34,9 @@ export class PuzzleView implements AfterViewInit {
 
   initializeFromPuzzle(puzzle: Puzzle) {
     // This shouldn't be needed, but for some reason it sometimes stays immutable anyway.
-    this.chessboard.makeMutable()
+    if (this.chessboard !== undefined) {
+      this.chessboard.makeMutable()
+    }
 
     this.puzzleId = puzzle.id
 
