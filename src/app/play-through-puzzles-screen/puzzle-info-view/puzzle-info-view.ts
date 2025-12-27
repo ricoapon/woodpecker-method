@@ -44,10 +44,4 @@ export class PuzzleInfoView {
     }
     window.open(url, '_blank')
   }
-
-  openPuzzlePgnInLichess() {
-    const encodedPgn = encodeURIComponent(this._puzzle.pgn)
-    const url = `https://lichess.org/paste?pgn=${encodedPgn}`
-    window.open(url, '_blank')
-  }
 }
